@@ -1,0 +1,18 @@
+{
+    "name": "covid19-eu-pages",
+    "version": 2,
+    "routes": [
+        { "src": "/(.*)",
+            "dest": "/cache/daily/(.*)",
+            "headers": {
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "OPTIONS",
+              "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+            },
+            "methods": ["OPTIONS"]
+        }
+      ],
+      "github": {
+        "silent": true
+      }
+}

@@ -16,7 +16,7 @@
 
 | Country | Status | Data Source |
 | ------------- | ------------- | --- |
-| HR | ![Cache HR Pages](https://github.com/covid19-eu-zh/covid19-eu-data/workflows/Cache%20HR%20Pages/badge.svg) | [![](https://img.shields.io/badge/Data%20Source-koronavirus.hr-informational)](https://www.koronavirus.hr) |
+| HR | ![Cache HR Pages](https://github.com/covid19-eu-zh/covid19-eu-pages/workflows/Cache%20HR%20Pages/badge.svg) | [![](https://img.shields.io/badge/Data%20Source-koronavirus.hr-informational)](https://www.koronavirus.hr) |
 
 
 ## Dataset
@@ -27,7 +27,7 @@ The `cache` folder contains the cached pages.
 
 **Bugs and requests**: PRs are welcome.
 
-[![Issues](http://img.shields.io/github/issues/covid19-eu-zh/covid19-eu-data.svg)]( https://github.com/covid19-eu-zh/covid19-eu-data/issues )
+[![Issues](http://img.shields.io/github/issues/covid19-eu-zh/covid19-eu-pages.svg)]( https://github.com/covid19-eu-zh/covid19-eu-pages/issues )
 
 **Telegram Channel (in Chinese)**: [新冠肺炎欧洲中文臺](https://t.me/s/covid19_eu_zh_c)
 

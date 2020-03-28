@@ -33,248 +33,831 @@
         var lng="_en";
         </script>
 <script type="text/javascript" src="/Scripts/js?v=PdM2iawb5jGY48Z5kzCVQB31uJOXkTvGIkoTTmv60ig1"></script>
+<style>
+			
+				canvas {
+					-webkit-touch-callout: none;
+					-webkit-user-select: none;
+					-khtml-user-select: none;
+					-moz-user-select: none;
+					-ms-user-select: none;
+					user-select: none;
+					outline: none;
+					-webkit-tap-highlight-color: rgba(255, 255, 255, 0); /* mobile webkit */
+				}  			
+				
+				.canvasHolder1, .canvasHolder2{overflow:hidden;}
+			
+				#chartjs-tooltip, #chartjs-tooltip2 {
+				  opacity: 1;
+				  position: absolute;
+				  background: rgba(0, 0, 0, .7);
+				  color: white;
+				  border-radius: 3px;
+				  -webkit-transition: all .1s ease;
+				  transition: all .1s ease;
+				  pointer-events: none;
+				  -webkit-transform: translate(-50%, 0);
+				  transform: translate(-50%, 0);
+				  width:170px;
+				}
+				
+				#chartjs-tooltip table tr, #chartjs-tooltip2 table tr{
+					font:12px/20px 'Lucida Grande','Lucida Sans Unicode','Arial','sans-serif';
+				}
+
+				.chartjs-tooltip-key {
+					display: inline-block;
+					width: 10px;
+					height: 10px;
+					margin-right: 10px;
+				}
+				
+				//.chartjs-size-monitor, .chartjs-size-monitor-expand, .chartjs-size-monitor-shrink{overflow:visible !important;}
+				
+			</style>
 <script>
 
-		        'use strict';
-		
-		        Number.isInteger = Number.isInteger || function(value) {
-			        return typeof value === "number" && 
-				            isFinite(value) && 
-				            Math.floor(value) === value;
-		        };					
+				'use strict';
 
-		        window.chartColors = {
-			        red: 'rgb(242, 51, 51)',
-			        orange: 'rgb(255, 159, 64)',
-			        yellow: 'rgb(255, 205, 86)',
-			        green: 'rgb(113, 181, 51)',
-			        blue: 'rgb(54, 162, 235)',
-			        purple: 'rgb(153, 102, 255)',
-			        grey: 'rgb(201, 203, 207)',
-			        transparent: 'rgba(255,255,255,0.5)'
-		        };
+				Number.isInteger = Number.isInteger || function(value) {
+					return typeof value === "number" && 
+							isFinite(value) && 
+							Math.floor(value) === value;
+				};					
 
-		        (function(global) {
-			        var MONTHS = [
-				        'January',
-				        'February',
-				        'March',
-				        'April',
-				        'May',
-				        'June',
-				        'July',
-				        'August',
-				        'September',
-				        'October',
-				        'November',
-				        'December'
-			        ];
+				window.chartColors = {
+					red: 'rgb(242, 51, 51)',
+					orange: 'rgb(255, 159, 64)',
+					yellow: 'rgb(255, 205, 86)',
+					green: 'rgb(113, 181, 51)',
+					blue: 'rgb(54, 162, 235)',
+					purple: 'rgb(153, 102, 255)',
+					grey: 'rgb(201, 203, 207)',
+					transparent: 'rgba(255,255,255,0.5)'
+				};
 
-			        var COLORS = [
-				        '#4dc9f6',
-				        '#f67019',
-				        '#f53794',
-				        '#537bc4',
-				        '#acc236',
-				        '#166a8f',
-				        '#00a950',
-				        '#58595b',
-				        '#8549ba'
-			        ];
+				(function(global) {
+					var MONTHS = [
+						'January',
+						'February',
+						'March',
+						'April',
+						'May',
+						'June',
+						'July',
+						'August',
+						'September',
+						'October',
+						'November',
+						'December'
+					];
 
-			        var Samples = global.Samples || (global.Samples = {});
-			        var Color = global.Color;
+					var COLORS = [
+						'#4dc9f6',
+						'#f67019',
+						'#f53794',
+						'#537bc4',
+						'#acc236',
+						'#166a8f',
+						'#00a950',
+						'#58595b',
+						'#8549ba'
+					];
 
-			        Samples.utils = {
-				        // Adapted from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
-				        srand: function(seed) {
-					        this._seed = seed;
-				        },
+					var Samples = global.Samples || (global.Samples = {});
+					var Color = global.Color;
 
-				        rand: function(min, max) {
-					        var seed = this._seed;
-					        min = min === undefined ? 0 : min;
-					        max = max === undefined ? 1 : max;
-					        this._seed = (seed * 9301 + 49297) % 233280;
-					        return min + (this._seed / 233280) * (max - min);
-				        },
+					Samples.utils = {
+						// Adapted from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
+						srand: function(seed) {
+							this._seed = seed;
+						},
 
-				        numbers: function(config) {
-					        var cfg = config || {};
-					        var min = cfg.min || 0;
-					        var max = cfg.max || 1;
-					        var from = cfg.from || [];
-					        var count = cfg.count || 8;
-					        var decimals = cfg.decimals || 8;
-					        var continuity = cfg.continuity || 1;
-					        var dfactor = Math.pow(10, decimals) || 0;
-					        var data = [];
-					        var i, value;
+						rand: function(min, max) {
+							var seed = this._seed;
+							min = min === undefined ? 0 : min;
+							max = max === undefined ? 1 : max;
+							this._seed = (seed * 9301 + 49297) % 233280;
+							return min + (this._seed / 233280) * (max - min);
+						},
 
-					        for (i = 0; i < count; ++i) {
-						        value = (from[i] || 0) + this.rand(min, max);
-						        if (this.rand() <= continuity) {
-							        data.push(Math.round(dfactor * value) / dfactor);
-						        } else {
-							        data.push(null);
-						        }
-					        }
+						numbers: function(config) {
+							var cfg = config || {};
+							var min = cfg.min || 0;
+							var max = cfg.max || 1;
+							var from = cfg.from || [];
+							var count = cfg.count || 8;
+							var decimals = cfg.decimals || 8;
+							var continuity = cfg.continuity || 1;
+							var dfactor = Math.pow(10, decimals) || 0;
+							var data = [];
+							var i, value;
 
-					        return data;
-				        },
+							for (i = 0; i < count; ++i) {
+								value = (from[i] || 0) + this.rand(min, max);
+								if (this.rand() <= continuity) {
+									data.push(Math.round(dfactor * value) / dfactor);
+								} else {
+									data.push(null);
+								}
+							}
 
-				        labels: function(config) {
-					        var cfg = config || {};
-					        var min = cfg.min || 0;
-					        var max = cfg.max || 100;
-					        var count = cfg.count || 8;
-					        var step = (max - min) / count;
-					        var decimals = cfg.decimals || 8;
-					        var dfactor = Math.pow(10, decimals) || 0;
-					        var prefix = cfg.prefix || '';
-					        var values = [];
-					        var i;
+							return data;
+						},
 
-					        for (i = min; i < max; i += step) {
-						        values.push(prefix + Math.round(dfactor * i) / dfactor);
-					        }
+						labels: function(config) {
+							var cfg = config || {};
+							var min = cfg.min || 0;
+							var max = cfg.max || 100;
+							var count = cfg.count || 8;
+							var step = (max - min) / count;
+							var decimals = cfg.decimals || 8;
+							var dfactor = Math.pow(10, decimals) || 0;
+							var prefix = cfg.prefix || '';
+							var values = [];
+							var i;
 
-					        return values;
-				        },
+							for (i = min; i < max; i += step) {
+								values.push(prefix + Math.round(dfactor * i) / dfactor);
+							}
 
-				        months: function(config) {
-					        var cfg = config || {};
-					        var count = cfg.count || 12;
-					        var section = cfg.section;
-					        var values = [];
-					        var i, value;
+							return values;
+						},
 
-					        for (i = 0; i < count; ++i) {
-						        value = MONTHS[Math.ceil(i) % 12];
-						        values.push(value.substring(0, section));
-					        }
+						months: function(config) {
+							var cfg = config || {};
+							var count = cfg.count || 12;
+							var section = cfg.section;
+							var values = [];
+							var i, value;
 
-					        return values;
-				        },
+							for (i = 0; i < count; ++i) {
+								value = MONTHS[Math.ceil(i) % 12];
+								values.push(value.substring(0, section));
+							}
 
-				        color: function(index) {
-					        return COLORS[index % COLORS.length];
-				        },
+							return values;
+						},
 
-				        transparentize: function(color, opacity) {
-					        var alpha = opacity === undefined ? 0.5 : 1 - opacity;
-					        return Color(color).alpha(alpha).rgbString();
-				        }
-			        };
+						color: function(index) {
+							return COLORS[index % COLORS.length];
+						},
 
-			        // DEPRECATED
-			        window.randomScalingFactor = function() {
-				        return Math.round(Samples.utils.rand(-100, 100));
-			        };
+						transparentize: function(color, opacity) {
+							var alpha = opacity === undefined ? 0.5 : 1 - opacity;
+							return Color(color).alpha(alpha).rgbString();
+						}
+					};
 
-			        // INITIALIZATION
+					// DEPRECATED
+					window.randomScalingFactor = function() {
+						return Math.round(Samples.utils.rand(-100, 100));
+					};
 
-			        Samples.utils.srand(Date.now());
+					// INITIALIZATION
 
-
-		        }(this));
-		
-                $(document).ready(function () {
-
-                    var presets = window.chartColors;
-                    var utils = Samples.utils;
-                    var inputs = {
-                        min: 20,
-                        max: 80,
-                        count: 8,
-                        decimals: 2,
-                        continuity: 1
-                    };
+					Samples.utils.srand(Date.now());
 
 
-                    var data = {
-                        labels: ["26.02","27.02","28.02","29.02","01.03","02.03","03.03","04.03","05.03","06.03","07.03","08.03","09.03","10.03","11.03","12.03","13.03","14.03","15.03","16.03","17.03","18.03","19.03","20.03","21.03","22.03","23.03","24.03","25.03","26.03","27.03","28.03"],
-                        datasets: [{
-                            backgroundColor: utils.transparentize(presets.transparent),
-                            borderColor: presets.red,
-                            data: ["2","3","3","5","7","8","9","9","10","10","11","12","12","13","16","19","32","37","49","57","69","89","105","128","206","254","315","382","442","495","586","657"],
-                            label: 'Cases Croatia',
-                            fill: 1,
-                            pointRadius: 4,
-                            pointHoverRadius: 4
-                        }, {
-                            backgroundColor: utils.transparentize(presets.transparent),
-                            borderColor: presets.green,
-                            data: ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","1","1","2","3","4","5","5","5","5","5","5","5","16","22","22","37","49"],
-                            label: 'Cured Croatia',
-                            fill: '-1',
-                            pointRadius: 4,
-                            pointHoverRadius: 4
-                        }]
-                    };
+				}(this));
+				
+				function calculateNovoOboljeli(brojLjudiCollection){
+					
+					var collection = [];
+					var currItem = null;
+					var itemBefore = null;
+					var currDatum = null;
+					
+					for(var i = 0, len = brojLjudiCollection.length; i < len; i++){
+						
+						currItem = parseInt(brojLjudiCollection[i], 10);
+						
+						if(i == 0){
+							
+							collection.push(parseInt(currItem, 10));
+							
+						}else if(i >0){
+							
+							itemBefore = parseInt(brojLjudiCollection[i - 1], 10);
+							collection.push(currItem - itemBefore);
+							
+						}
+						
+						
+					}
+					
+					return collection;
+					
+				}
+			
+							
+				var chartjsRef = null;
+				var labelsCollection = ["26.02","27.02","28.02","29.02","01.03","02.03","03.03","04.03","05.03","06.03","07.03","08.03","09.03","10.03","11.03","12.03","13.03","14.03","15.03","16.03","17.03","18.03","19.03","20.03","21.03","22.03","23.03","24.03","25.03","26.03","27.03","28.03"];
+				var slucajeviHrvatskaCollection = ["2","3","3","5","7","8","9","9","10","10","11","12","12","13","16","19","32","37","49","57","69","89","105","128","206","254","315","382","442","495","586","657"];
+				var izlijecniHrvatskaCollection = ["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","1","1","2","3","4","5","5","5","5","5","5","5","16","22","22","37","49"];
+				var novoOboljeliHrvatskaCollection = calculateNovoOboljeli(slucajeviHrvatskaCollection);
+				var lastLabelWithDateTime = "28.03.2020 16:01"
+				var globlCoordinates = null;
+				var height = 0;
+				var width = 0;	
+				var chartjstooltip = $("#chartjs-tooltip");
+				var chartjstooltip2 = $("#chartjs-tooltip2");
+				
+	
+				$(window).on("resize", function(){
+					height = document.body.clientHeight;
+					width = document.body.clientWidth;
+					
+					if(document.getElementById('chartjs-tooltip') != null)
+						document.getElementById('chartjs-tooltip').style.visibility = "hidden";					
+					
+					if(document.getElementById('chartjs-tooltip2')!= null)
+						document.getElementById('chartjs-tooltip2').style.visibility = "hidden";	
+				});
 
-                    var options = {
-                        title: {
-                            display: true,
-                            fontSize: '18',
-                            text: ''
-                        },
-                        legend: {
-                            position: "bottom",
-                            display: false
-                        },
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        spanGaps: true,
-                        elements: {
-                            line: {
-                                tension: 0.000001
-                            }
-                        },
-                        scales: {
-                            yAxes: [{
-                                stacked: false,
-                                // gridLines:{
-                                // color: "rgba(0, 0, 0, 0)"
-                                // }
-                                ticks: {
-                                    beginAtZero: true,
-                                    callback: function (value) { if (Number.isInteger(value)) { return value; } }
-                                }
-                            }],
-                            xAxes: [{
-                                stacked: false,
-                                ticks: {
-                                    callback: function (tick, index, array) {
-                                        //return (index % 3) ? "" : tick;
-                                        console.log("array.length: " + array.length);
-                                        return (index == 0 || index == array.length - 1 || index == 12) ? tick : "";
-                                    }
-                                }
-						        // gridLines:{
-							        // color: "rgba(0, 0, 0, 0)"
-						        // }							
-					        }]
-				        },
-				        plugins: {
-					        filler: {
-						        propagate: false
-					        },
-					        'samples-filler-analyser': {
-						        target: 'chart-analyser'
-					        }
-				        }
-			        };
+				$(document).ready(function () {
+					
+						
+					$(".canvasHolder1").on("click mouseleave mouseenter",function(e){
+										
+						 if(document.getElementById('chartjs-tooltip2')!= null)
+							document.getElementById('chartjs-tooltip2').style.visibility = "hidden";
+						 
+						 if(document.getElementById('chartjs-tooltip') != null)
+							 document.getElementById('chartjs-tooltip').style.visibility = "visible";		
 
-			        var chart = new Chart('canvas', {
-				        type: 'line',
-				        data: data,
-				        options: options
-			        });
+						if(e.type == "mouseleave"){
+							
+							 if(document.getElementById('chartjs-tooltip2')!= null)
+								document.getElementById('chartjs-tooltip2').style.visibility = "hidden";
+							 
+							 if(document.getElementById('chartjs-tooltip') != null)
+								 document.getElementById('chartjs-tooltip').style.visibility = "hidden";								
+								
+						}
+						
+					});
+					
+					$(".canvasHolder2").on("click mouseleave mouseenter",function(e){
+						
+						 if(document.getElementById('chartjs-tooltip2')!= null)
+							document.getElementById('chartjs-tooltip2').style.visibility = "visible";
+						 
+						 if(document.getElementById('chartjs-tooltip') != null)
+							 document.getElementById('chartjs-tooltip').style.visibility = "hidden";	
 
-		        });				
+						if(e.type == "mouseleave"){
+							
+							 if(document.getElementById('chartjs-tooltip2')!= null)
+								document.getElementById('chartjs-tooltip2').style.visibility = "hidden";
+							 
+							 if(document.getElementById('chartjs-tooltip') != null)
+								 document.getElementById('chartjs-tooltip').style.visibility = "hidden";								
+								
+						}						 
+						
+					});	
+									
+				
+					height = document.body.clientHeight;
+					width = document.body.clientWidth;
 
-	        </script>
+					var presets = window.chartColors;
+					var utils = Samples.utils;
+					var inputs = {
+						min: 20,
+						max: 80,
+						count: 8,
+						decimals: 2,
+						continuity: 1
+					};
+					
+
+					Chart.defaults.global.pointHitDetectionRadius = 1;
+											
+
+					var customTooltips = function(tooltip) {
+						// Tooltip Element
+						var self = this;
+						var tooltipEl = document.getElementById('chartjs-tooltip');
+												
+						if(document.getElementById('chartjs-tooltip2') != null){
+							 document.getElementById('chartjs-tooltip2').style.visibility = "hidden";
+						}
+						
+
+						// Create element on first render
+						if (!tooltipEl) {
+							tooltipEl = document.createElement('div');
+							tooltipEl.id = 'chartjs-tooltip';
+							tooltipEl.innerHTML = "<table></table>"
+							document.body.appendChild(tooltipEl);
+						}
+
+						// Hide if no tooltip
+						if (Element.opacity === 0) {
+							tooltipEl.style.opacity = 0;
+							return;
+						}
+
+
+						// Set caret Position
+						tooltipEl.classList.remove('above', 'below', 'no-transform');
+						if (Element.yAlign) {
+							tooltipEl.classList.add(Element.yAlign);
+						} else {
+							tooltipEl.classList.add('no-transform');
+						}
+
+						function getBody(bodyItem) {
+							return bodyItem.lines;
+						}
+
+						// Set Text
+						if (tooltip.body) {
+							var titleLines = tooltip.title || [];
+							var bodyLines = tooltip.body.map(getBody);
+
+							var innerHtml = '<thead>';
+
+							titleLines.forEach(function(title) {
+								innerHtml += '<tr><th style="text-align:left;">' + title + '</th></tr>';
+							});
+							innerHtml += '</thead><tbody>';
+
+							bodyLines.forEach(function(body, i) {
+								
+								var hexBoja= "";
+								
+								if(i == 0){
+									hexBoja = "rgb(242, 51, 51)";
+								}else if(i ==1){
+									hexBoja = "rgb(113, 181, 51)";
+								}
+								
+								var colors = tooltip.labelColors[i];
+								var style="";
+								style +="display:inline-block;";
+								style +="border:solid 1px " + hexBoja +";border-radius:4px;background-color:" + hexBoja + "";
+								var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
+								innerHtml += '<tr><td>' + span + body + '</td></tr>';
+							});
+							innerHtml += '</tbody>';
+							
+							var tableRoot = tooltipEl.querySelector('table');
+							tableRoot.innerHTML = innerHtml;
+						}
+						
+						// `this` will be the overall tooltip
+						var position = self._chart.canvas.getBoundingClientRect();
+						
+						var winWidth = window.width;
+						var winHeight = window.height;
+						var left = document.getElementById("canvas").offsetLeft + tooltip.caretX;
+						var top = document.getElementById("canvas").offsetTop + tooltip.caretY;
+						
+						
+						//console.log("winWidth=" + winWidth);
+						//console.log("winHeight=" + winHeight);
+						//console.log("left=" + left);
+						//console.log("top=" + top);
+
+						left = document.getElementById("canvas").offsetLeft + tooltip.caretX - 80;
+						
+						if(left < 150){
+							left = 150;
+						}
+
+						// Display, position, and set styles for font
+						tooltipEl.style.opacity = 1;
+						tooltipEl.style.left = left  + 'px';
+						tooltipEl.style.top = top - 90 + 'px';
+						tooltipEl.style.fontFamily = tooltip._fontFamily;
+						tooltipEl.style.fontSize = tooltip.fontSize;
+						tooltipEl.style.fontStyle = tooltip._fontStyle;
+						tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';						
+						
+					};
+
+					
+					function createConfig(position) {
+						return {
+							type: 'line',
+							data: {
+								labels: labelsCollection,
+								datasets: [{
+									backgroundColor: utils.transparentize(presets.transparent),
+									borderColor: presets.red,
+									data: slucajeviHrvatskaCollection,
+									label: 'Cases Croatia',
+									fill: true,
+									pointRadius: 2
+								}, {
+									backgroundColor: utils.transparentize(presets.transparent),
+									borderColor: presets.green,
+									data: izlijecniHrvatskaCollection,
+									label: 'Cured Croatia',
+									fill: true,
+									pointRadius: 2
+								}]
+							},
+							options: {
+								title: {
+									font:{
+										family:'Lucida Grande, Lucida Sans Unicode, Arial, sans-serif'
+									},
+									display: true,
+									fontSize: '12',
+									text: 'Grafički pregled Hrvatska'
+								},					
+								tooltips: {
+									mode: 'nearest',
+									intersect: false,
+									enabled: false,
+									custom: customTooltips,
+									callbacks: {
+											title: function(tooltipItem, data) {
+												
+												var naslov = "";
+												
+												if(chartjsRef.data.labels.length - 1 == tooltipItem[0].index){
+													naslov = lastLabelWithDateTime;
+												}else{
+													naslov = tooltipItem[0].label;
+												}
+												
+												return naslov;
+											},								
+											label: function(tooltipItem, data) {
+												
+												var returnValue = "";
+												var currIndex = tooltipItem.index;
+												var datasets = data.datasets;
+												var firstDataSet = datasets[0];
+												var secondDataSet = datasets[1];
+												var value1 = firstDataSet.data[currIndex];
+												var value2 = secondDataSet.data[currIndex];	
+												
+												var bojaCrveno = "rgb(242, 51, 51)";
+												var bojaZeleno = "rgb(113, 181, 51)";
+												
+												var tmpPrviDio = "";
+												var tmpDrugiDio = "";												
+
+												var prviGrafProsliIndex = firstDataSet.data[currIndex - 1];
+												var drugiGrafProsliIndex = secondDataSet.data[currIndex - 1];
+												
+												var prviGrafRezDodavanja = 0;
+												var drugiGrafRezDodavanja = 0;
+												
+												prviGrafRezDodavanja = parseInt(value1, 10) - parseInt(prviGrafProsliIndex, 10);
+												drugiGrafRezDodavanja = parseInt(value2, 10) - parseInt(drugiGrafProsliIndex, 10);
+												
+												if(isNaN(prviGrafRezDodavanja) == false){
+													if(prviGrafRezDodavanja != 0){
+														prviGrafRezDodavanja = " (<span style='font-weight:800;color:" + bojaCrveno + "'>+" + prviGrafRezDodavanja + "</span>) ";
+													}else{
+														prviGrafRezDodavanja = "";
+													}												
+												}else{
+													prviGrafRezDodavanja = "";
+												}	
+
+												if(isNaN(drugiGrafRezDodavanja) == false){
+													if(drugiGrafRezDodavanja != 0){
+														drugiGrafRezDodavanja = " (<span style='font-weight:800;color:" + bojaZeleno + "'>+" + drugiGrafRezDodavanja + "</span>) ";
+													}else{
+														drugiGrafRezDodavanja = "";
+													}												
+												}else{
+													drugiGrafRezDodavanja = "";
+												}														
+												
+												
+												tmpPrviDio = "Cases";
+												tmpPrviDio = tmpPrviDio +': ' + value1 + prviGrafRezDodavanja;					
+
+												tmpDrugiDio = "Cured";
+												tmpDrugiDio = "<span class='chartjs-tooltip-key' style='display:inline-block;border:solid 1px " + bojaZeleno + ";border-radius:4px;background-color:" + bojaZeleno + "'></span>Cured: " + value2 + "  " + drugiGrafRezDodavanja;
+												//tmpDrugiDio = tmpDrugiDio +': '  + value2 + drugiGrafRezDodavanja;
+													
+												returnValue = tmpPrviDio + "<br/>" + tmpDrugiDio;	
+												
+												return returnValue;
+											}
+									}							
+								},		
+								hover: {
+									mode: 'index',
+									intersect: false
+								},								
+								legend: {
+									position: "bottom",
+									display: false
+								},
+								responsive: true,
+								maintainAspectRatio: false,
+								spanGaps: true,
+								elements: {
+									line: {
+										tension: 0.000001
+									}
+								},
+								scales: {
+									yAxes: [{
+										stacked: false,
+										// gridLines:{
+										// color: "rgba(0, 0, 0, 0)"
+										// }
+										ticks: {
+											beginAtZero: true,
+											callback: function (value) { if (Number.isInteger(value)) { return value; } }
+										}
+									}],
+									xAxes: [{
+										stacked: false,
+										ticks: {
+											callback: function (tick, index, array) {
+												//return (index % 3) ? "" : tick;
+												return (index == 0 || index == array.length - 1 || index == 12) ? tick : "";
+											}
+										}
+										// gridLines:{
+											// color: "rgba(0, 0, 0, 0)"
+										// }							
+									}]
+								},
+								plugins: {
+									filler: {
+										propagate: false
+									},
+									'samples-filler-analyser': {
+										target: 'chart-analyser'
+									}
+								}
+							}
+						};
+					}			
+					
+					['average'].forEach(function(position) {
+						var canvas = document.getElementById('canvas');
+						var ctx = canvas.getContext('2d');
+						var config = createConfig(position);
+						chartjsRef = new Chart(ctx, config);
+					});	
+					
+					
+					var customTooltipsNovoOboljeli = function(tooltip) {
+						// Tooltip Element
+						var tooltipEl = document.getElementById('chartjs-tooltip2');
+						
+						if(document.getElementById('chartjs-tooltip') != null){
+							document.getElementById('chartjs-tooltip').style.visibility = "hidden";
+						}							
+
+						// Create element on first render
+						if (!tooltipEl) {
+							tooltipEl = document.createElement('div');
+							tooltipEl.id = 'chartjs-tooltip2';
+							tooltipEl.innerHTML = "<table></table>"
+							document.body.appendChild(tooltipEl);
+						}
+
+						// Hide if no tooltip
+						if (Element.opacity === 0) {
+							tooltipEl.style.opacity = 0;
+							return;
+						}
+
+
+						// Set caret Position
+						tooltipEl.classList.remove('above', 'below', 'no-transform');
+						if (Element.yAlign) {
+							tooltipEl.classList.add(Element.yAlign);
+						} else {
+							tooltipEl.classList.add('no-transform');
+						}
+
+						function getBody(bodyItem) {
+							return bodyItem.lines;
+						}
+
+						// Set Text
+						if (tooltip.body) {
+							var titleLines = tooltip.title || [];
+							var bodyLines = tooltip.body.map(getBody);
+
+							var innerHtml = '<thead>';
+
+							titleLines.forEach(function(title) {
+								innerHtml += '<tr><th style="text-align:left;">' + title + '</th></tr>';
+							});
+							innerHtml += '</thead><tbody>';
+
+							bodyLines.forEach(function(body, i) {
+								
+								var hexBoja= "#033e7c";
+								var colors = tooltip.labelColors[i];
+								var style="";
+								style +="display:inline-block;";
+								style +="border:solid 2px " + hexBoja +";border-radius:4px;background-color:" + hexBoja + "";
+								var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
+								innerHtml += '<tr><td>' + span + body + '</td></tr>';
+							});
+							innerHtml += '</tbody>';
+
+							var tableRoot = tooltipEl.querySelector('table');
+							tableRoot.innerHTML = innerHtml;
+						}
+
+						// `this` will be the overall tooltip
+						var position = this._chart.canvas.getBoundingClientRect();
+						
+						var winWidth = window.width;
+						var winHeight = window.height;
+						var left = document.getElementById("canvas2").offsetLeft + tooltip.caretX;
+						var top = document.getElementById("canvas2").offsetTop + tooltip.caretY;
+						
+						
+						//console.log("winWidth=" + winWidth);
+						//console.log("winHeight=" + winHeight);
+						//console.log("left=" + left);
+						//console.log("top=" + top);
+
+						left = document.getElementById("canvas2").offsetLeft + tooltip.caretX - 80;
+						
+						if(left < 150){
+							left = 150;
+						}
+
+						var positionY = this._chart.canvas.offsetTop;
+						var positionX = this._chart.canvas.offsetLeft;
+
+						// Display, position, and set styles for font
+						tooltipEl.style.opacity = 1;
+						tooltipEl.style.left = left + 'px';
+						tooltipEl.style.top = positionY + tooltip.caretY - 70 + 'px';
+						tooltipEl.style.fontFamily = tooltip._bodyFontFamily;
+						tooltipEl.style.fontSize = tooltip.bodyFontSize + 'px';
+						tooltipEl.style.fontStyle = tooltip._bodyFontStyle;
+						tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';				
+						
+					};					
+
+
+					function createConfigNovoOboljeli(position) {
+						
+						return {
+							type: 'bar',
+							data: {
+								labels: labelsCollection,
+								datasets: [{
+									backgroundColor: "#033e7c",
+									data: novoOboljeliHrvatskaCollection,
+									borderWidth: 1,
+									label: 'Porast po danu',
+									fill: false,
+									hoverBackgroundColor:"#424242"
+								}]
+							},
+							options: {
+								title: {
+									font:{
+										family:'Lucida Grande, Lucida Sans Unicode, Arial, sans-serif'
+									},									
+									display: true,
+									fontSize: '12',
+									text: 'Novozaraženi u Hrvatskoj'
+								},					
+								tooltips: {
+									mode: 'index',
+									intersect: false,
+									enabled: false,
+									custom: customTooltipsNovoOboljeli,
+									callbacks: {
+											title: function(tooltipItem, data) {
+												
+												var naslov = "";
+												
+												if(chartjsRef.data.labels.length - 1 == tooltipItem[0].index){
+													naslov = lastLabelWithDateTime;
+												}else{
+													naslov = tooltipItem[0].label;
+												}
+												
+												return naslov;
+											},								
+											label: function(tooltipItem, data) {
+												
+												var returnValue = "";
+												var currIndex = tooltipItem.index;
+
+												var bojaCrveno = "rgb(242, 51, 51)";
+												var bojaZeleno = "rgb(113, 181, 51)";	
+
+												var currItem = null;
+												var itemBefore = null;
+												
+												var razlika = 0;
+												
+												var result = "";
+												
+												currItem = parseInt(novoOboljeliHrvatskaCollection[currIndex], 10);
+												
+												if(currIndex > 0){
+													itemBefore = parseInt(novoOboljeliHrvatskaCollection[currIndex - 1], 10);
+												}else{
+													itemBefore = 0;
+												}
+												
+												razlika = currItem - itemBefore;
+												
+												if(razlika > 0){
+													result = "<span style='font-weight:bold;color:" + bojaCrveno + ";font-family: 'Lucida Grande, Lucida Sans Unicode, Arial, sans-serif';'>(+" + razlika + ")</span>";
+												}else if(razlika < 0){
+													result = "<span style='font-weight:bold;color:" + bojaZeleno + ";font-family: 'Lucida Grande, Lucida Sans Unicode, Arial, sans-serif';'>(" + razlika + ")</span>";
+												}else{
+													result = "";
+												}
+												
+												var currIndex = tooltipItem.index;
+												var text = "Novozaraženi";
+												var value = tooltipItem.value;
+												var returnValue = "";
+												
+												returnValue = text + ": " + value + " " + result;
+																				
+												
+												return returnValue;
+											}
+									}							
+								},		
+								hover: {
+									mode: 'index',
+									intersect: false
+								},								
+								legend: {
+									position: "bottom",
+									display: false
+								},
+								responsive: true,
+								maintainAspectRatio: false,
+								spanGaps: true,
+								elements: {
+									line: {
+										tension: 0.000001
+									}
+								},
+								scales: {
+									yAxes: [{
+										stacked: false,
+										// gridLines:{
+										// color: "rgba(0, 0, 0, 0)"
+										// }
+										ticks: {
+											beginAtZero: true,
+											callback: function (value) { if (Number.isInteger(value)) { return value; } }
+										}
+									}],
+									xAxes: [{
+										stacked: false,
+										barThickness: 5,  // number (pixels) or 'flex'
+										maxBarThickness: 8, // number (pixels)
+										ticks: {
+											callback: function (tick, index, array) {
+												//return (index % 3) ? "" : tick;
+												return (index == 0 || index == array.length - 1 || index == 12) ? tick : "";
+											}
+										}
+										// gridLines:{
+											// color: "rgba(0, 0, 0, 0)"
+										// }							
+									}]
+								},
+								plugins: {
+									filler: {
+										propagate: false
+									},
+									'samples-filler-analyser': {
+										target: 'chart-analyser'
+									}
+								}
+							}
+						};
+					}
+					
+
+					['average'].forEach(function(position) {
+						var canvas = document.getElementById('canvas2');
+						var ctx = canvas.getContext('2d');
+						var config = createConfigNovoOboljeli(position);
+						chartjsRef = new Chart(ctx, config);
+					});
+
+				});				
+
+			</script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-52969758-56"></script>
 <script>
@@ -3228,8 +3811,11 @@ World: <strong>28.662</strong>
 </g>
 </svg>
 </div>
-<div class='main_article_right'><a href='/latest-news/total-of-657-people-infected-in-croatia/151'><h2>Total of 657 people infected in Croatia</h2></a><div class='gray'>Total of 657 people infected with coronavirus was recoreded on Saturday in Croatia. Five deaths have been recorded. </div><span class='date gray'>28.03.2020. 16:00</span><div style='min-height:225px;'>
+<div class='main_article_right'><a href='/latest-news/total-of-657-people-infected-in-croatia/151'><h2>Total of 657 people infected in Croatia</h2></a><div class='gray'>Total of 657 people infected with coronavirus was recoreded on Saturday in Croatia. Five deaths have been recorded. </div><span class='date gray'>28.03.2020. 16:00</span><div class='canvasHolder1' style='min-height:225px;margin:30px 0;'>
 <canvas id='canvas'></canvas>
+</div>
+<div class='canvasHolder2' style='min-height:225px;'>
+<canvas id='canvas2'></canvas>
 </div>
 </div><div class='clear'> </div></div><div class='space_16'> </div>
 </div>
@@ -3239,11 +3825,11 @@ World: <strong>28.662</strong>
 <a href='/latest-news/150'><h1>Latest news</h1></a>
 </div>
 <div class='news_container'>
-<div class='news'><a href='/decision-on-quarantine-and-self-isolation-of-international-transport-drivers/325'><span class='news_img'><img src='/img/placeholder_750x500.png?width=366&amp;height=244&amp;mode=crop' alt='' /></span><span class='news_txt'><span class='h2_small'>Decision on Quarantine and Self-Isolation of International Transport Drivers </span></span></a><div class='gray'> </div><span class='date gray'>March 27, 10:28</span><ul class='news_links'></ul></div><div class='news'><a href='/who-issues-passes-to-move-between-cities-in-croatia/306'><span class='news_img'><img src='/UserDocsImages//vijesti/HAK.jpg?width=366&amp;height=244&amp;mode=crop' alt='/vijesti/HAK.jpg' /></span><span class='news_txt'><span class='h2_small'>Who issues passes to move between cities in Croatia?</span></span></a><div class='gray'> </div><span class='date gray'>March 25, 17:36</span><ul class='news_links'></ul></div><div class='news news3'><a href='/dorh-to-crack-down-on-spread-of-virus-and-fake-news/300'><span class='news_img'><img src='/UserDocsImages//vijesti/DORH%20logo.jpg?width=366&amp;height=244&amp;mode=crop' alt='/vijesti/DORH%20logo.jpg' /></span><span class='news_txt'><span class='h2_small'>DORH to crack down on spread of virus and fake news</span></span></a><div class='gray'> </div><span class='date gray'>March 25, 08:19</span><ul class='news_links'></ul></div></div>
+<div class='news'><a href='/decision-on-quarantine-and-self-isolation-of-international-transport-drivers/325'><span class='news_img'><img src='/img/placeholder_750x500.png?width=366&amp;height=244&amp;mode=crop' alt='' /></span><span class='news_txt'><span class='h2_small'>Decision on Quarantine and Self-Isolation of International Transport Drivers </span></span></a><div class='gray'> </div><span class='date gray'>March 28, 22:08</span><ul class='news_links'></ul></div><div class='news'><a href='/who-issues-passes-to-move-between-cities-in-croatia/306'><span class='news_img'><img src='/UserDocsImages//vijesti/HAK.jpg?width=366&amp;height=244&amp;mode=crop' alt='/vijesti/HAK.jpg' /></span><span class='news_txt'><span class='h2_small'>Who issues passes to move between cities in Croatia?</span></span></a><div class='gray'> </div><span class='date gray'>March 28, 22:08</span><ul class='news_links'></ul></div><div class='news news3'><a href='/travelling-find-all-important-information-in-one-place/210'><span class='news_img'><img src='/UserDocsImages//foto-content/putovanja.jpg?width=366&amp;height=244&amp;mode=crop' alt='/foto-content/putovanja.jpg' /></span><span class='news_txt'><span class='h2_small'>Travelling? Find all important information in one place</span></span></a><div class='gray'> </div><span class='date gray'>March 28, 22:37</span><ul class='news_links'></ul></div></div>
 <div class='clear'></div>
 <div class='space_32'></div>
 </div>
- <div class="clear"> </div>
+<div class="clear"> </div>
 <div class="space_24"> </div>
 <div class="clear"> </div>
 <div class="space_32"> </div>

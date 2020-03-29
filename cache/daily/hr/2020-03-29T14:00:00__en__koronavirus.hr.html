@@ -3,25 +3,22 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="hr"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 <meta charset="utf-8" />
-<title>Službena stranica Vlade za pravodobne i točne informacije o koronavirusu</title>
+<title>Home</title>
 <meta name="keywords" content="" />
-<meta name="description" content="Sve pravodobne i točne Informacije o koronavirusu - službena stranica Vlade Republike Hrvatske o korona virusu, coronavirus COVID-19" />
 <link href="/fonts/fonts_mapa.css?1=1" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon_vlada.ico" />
-<meta property="og:title" content="Službena stranica Vlade za pravodobne i točne informacije o koronavirusu" />
+<meta property="og:title" content="Home" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="koronavirus.hr" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@VladaRH" />
-<meta name="twitter:title" content="Službena stranica Vlade za pravodobne i točne informacije o koronavirusu" />
-<meta name="language" content="hr">
+<meta name="twitter:title" content="Home" />
+<meta name="language" content="en">
 <meta name="copyright" content="CMS Globaladmin by Globaldizajn">
-<meta property="og:description" content="Sve pravodobne i točne Informacije o koronavirusu - službena stranica Vlade Republike Hrvatske o korona virusu, coronavirus COVID-19" />
-<meta name="twitter:description" content="Sve pravodobne i točne Informacije o koronavirusu - službena stranica Vlade Republike Hrvatske o korona virusu, coronavirus COVID-19" />
 <meta property="og:image" content="https://www.koronavirus.hr/img/koronavirus-logo.png" />
 <meta name="twitter:image" content="https://www.koronavirus.hr/img/koronavirus-logo.png" />
 <script>
@@ -33,7 +30,7 @@
             @font-face{font-family:vladarhserif_regregular;font-display:swap;src:url(/fonts/vladarhserif-regular-webfont.eot);src:url(/fonts/vladarhserif-regular-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/vladarhserif-regular-webfont.woff) format('woff'),url(/fonts/vladarhserif-regular-webfont.ttf) format('truetype');font-weight:400;font-style:normal}@font-face{font-family:vladarh_serifbold;font-display:swap;src:url(/fonts/vladarhserif-bold-webfont.eot);src:url(/fonts/vladarhserif-bold-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/vladarhserif-bold-webfont.woff) format('woff'),url(/fonts/vladarhserif-bold-webfont.ttf) format('truetype');font-weight:400;font-style:normal}@font-face{font-family:vladarh_sanssemibold;font-display:swap;src:url(/fonts/vladarhsans-semibold-webfont.eot);src:url(/fonts/vladarhsans-semibold-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/vladarhsans-semibold-webfont.woff) format('woff'),url(/fonts/vladarhsans-semibold-webfont.ttf) format('truetype');font-weight:400;font-style:normal}@font-face{font-family:vladarhsans_regregular;font-display:swap;src:url(/fonts/vladarhsans-regular-webfont.eot);src:url(/fonts/vladarhsans-regular-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/vladarhsans-regular-webfont.woff) format('woff'),url(/fonts/vladarhsans-regular-webfont.ttf) format('truetype');font-weight:400;font-style:normal}@font-face{font-family:vladarh_serifbook;font-display:swap;src:url(/fonts/vladarhserif-book-webfont.eot);src:url(/fonts/vladarhserif-book-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/vladarhserif-book-webfont.woff) format('woff'),url(/fonts/vladarhserif-book-webfont.ttf) format('truetype');font-weight:400;font-style:normal}
         </style>
 <script>
-        var lng="";
+        var lng="_en";
         </script>
 <script type="text/javascript" src="/Scripts/js?v=PdM2iawb5jGY48Z5kzCVQB31uJOXkTvGIkoTTmv60ig1"></script>
 <style>
@@ -453,14 +450,14 @@
 									backgroundColor: utils.transparentize(presets.transparent),
 									borderColor: presets.red,
 									data: slucajeviHrvatskaCollection,
-									label: 'Slučajevi Hrvatska',
+									label: 'Cases Croatia',
 									fill: true,
 									pointRadius: 2
 								}, {
 									backgroundColor: utils.transparentize(presets.transparent),
 									borderColor: presets.green,
 									data: izlijecniHrvatskaCollection,
-									label: 'Izliječeni Hrvatska',
+									label: 'Cured Croatia',
 									fill: true,
 									pointRadius: 2
 								}]
@@ -538,11 +535,11 @@
 												}														
 												
 												
-												tmpPrviDio = "Slučajevi";
+												tmpPrviDio = "Cases";
 												tmpPrviDio = tmpPrviDio +': ' + value1 + prviGrafRezDodavanja;					
 
-												tmpDrugiDio = "Izliječeni";
-												tmpDrugiDio = "<span class='chartjs-tooltip-key' style='display:inline-block;border:solid 1px " + bojaZeleno + ";border-radius:4px;background-color:" + bojaZeleno + "'></span>Izliječeni: " + value2 + "  " + drugiGrafRezDodavanja;
+												tmpDrugiDio = "Cured";
+												tmpDrugiDio = "<span class='chartjs-tooltip-key' style='display:inline-block;border:solid 1px " + bojaZeleno + ";border-radius:4px;background-color:" + bojaZeleno + "'></span>Cured: " + value2 + "  " + drugiGrafRezDodavanja;
 												//tmpDrugiDio = tmpDrugiDio +': '  + value2 + drugiGrafRezDodavanja;
 													
 												returnValue = tmpPrviDio + "<br/>" + tmpDrugiDio;	
@@ -874,44 +871,24 @@
 </head>
 <body>
 <div id="skiptocontent">
-<a href="#content" class="element-invisible element-focusable">Preskoči na glavni sadržaj</a>
+<a href="#content" class="element-invisible element-focusable">Skip to main content</a>
 </div>
 <header>
 <div class="center">
 <div class="logo_search_content">
-<a href="/" class="logo" title="Naslovnica"></a>
-<a href="/" class="logo-right" title="Naslovnica"></a>
-<div class="topnav_icon"><a href="javascript:;" id="show_menu" title="Izbornik">&nbsp;</a></div>
-<div class="search">
-<form action="/rezultati-pretrazivanja/20" method="GET" role="search">
-<input type="search" name="q" id="q" class="search_input" placeholder="Pretražite stranice" aria-label="Unesite pojam za pretraživanje" /><input type="submit" class="search_btn" value=" " id="btnPretrazi" aria-label="Pokreni pretraživanje" />
-</form>
-</div>
+<a href="/en" class="logo logo_en" title="Homepage"></a>
+<a href="/en" class="logo-right logo-right_en" title="Homepage"></a>
+<div class="topnav_icon"><a href="javascript:;" id="show_menu" title="Menu">&nbsp;</a></div>
 </div>
 <nav class="topnav" role="navigation" aria-label="glavna navigacija" id="menu">
 <div class="close" id="hide_menu"> </div>
 <ul class="main-nav">
-<li><a href='/najnovije/34'>Najnovije</a> </li>
-<li><a href='/sto-moram-znati/8'>Što moram znati</a> <span class='expand'></span><ul class='podNivo'>
-<li><a href='/o-bolesti/103'>O bolesti</a></li><li><a href='/o-zivotu/185'>O životu</a></li><li><a href='/o-prevenciji/12'>O prevenciji</a></li><li><a href='/o-putovanju/11'>O putovanju</a></li><li><a href='/o-skolovanju/13'>O školovanju</a></li><li><a href='/o-poslu/46'>O poslu</a></li></ul>
-</li>
-<li><a href='/zadnje-azurirano/57'>Zadnje ažurirano</a> </li>
-<li><a href='/vladine-mjere/101'>Vladine mjere</a> <span class='expand'></span><ul class='podNivo'>
-<li><a href='/mjere-ministarstva-financija/114'>Mjere ministarstva financija</a></li><li><a href='/ministarstvo-regionalnoga-razvoja-i-fondova-europske-unije/115'>Ministarstvo regionalnoga razvoja i fondova Europske Unije</a></li><li><a href='/ministarstvo-turizma/116'>Ministarstvo turizma</a></li><li><a href='/ministarstvo-gospodarstva-poduzetnistva-i-obrta/117'>Ministarstvo gospodarstva, poduzetništva i obrta</a></li><li><a href='/ministarstvo-rada-i-mirovinskog-sustava/119'>Ministarstvo rada i mirovinskog sustava</a></li><li><a href='/ministarstvo-poljoprivrede/120'>Ministarstvo poljoprivrede</a></li><li><a href='/ministarstvo-mora-prometa-i-infrastrukture/121'>Ministarstvo mora, prometa i infrastrukture</a></li><li><a href='/ministarstvo-kulture/122'>Ministarstvo kulture</a></li><li><a href='/mjere-pomoci-gospodarstvu/126'>Mjere pomoći gospodarstvu</a></li><li><a href='/donesene-nove-mjere-potpore-za-ocuvanje-radnih-mjesta/127'>Donesene nove mjere potpore za očuvanje radnih mjesta</a></li><li><a href='/mjere-za-pomoc-poljoprivrednicima-i-ribarstvu/128'>Mjere za pomoć poljoprivrednicima i ribarstvu</a></li><li><a href='/mjere-za-kulturu/133'>Mjere za kulturu</a></li><li><a href='/mjere-za-prijevoznike-i-turisticke-djelatnike/138'>Mjere za prijevoznike i turističke djelatnike</a></li><li><a href='/potpore-za-ocuvanje-radnih-mjesta-u-djelatnostima-pogodjenima-epidemijom-koronavirusa/235'>Potpore za očuvanje radnih mjesta u djelatnostima pogođenima epidemijom Koronavirusa</a></li><li><a href='/vladine-potpore-za-ocuvanje-radnih-mjesta/253'>Vladine potpore za očuvanje radnih mjesta </a></li><li><a href='/hamag-bicro-uvodi-nove-mjere-esif-zajmova-za-obrtna-sredstva/277'>HAMAG-BICRO uvodi nove mjere ESIF zajmova za obrtna sredstva</a></li><li><a href='/hrvatski-zavod-za-zaposljavanje/292'>Hrvatski zavod za zapošljavanje</a></li><li><a href='/ministarstvo-za-demografiju-obitelj-mlade-i-socijalnu-politiku/337'>Ministarstvo za demografiju, obitelj, mlade i socijalnu politiku</a></li></ul>
-</li>
-<li><a href='/cinjenice-o-koronavirusu/55'>Činjenice o koronavirusu</a> <span class='expand'></span><ul class='podNivo'>
-<li><a href='/najcesca-pitanja-i-odgovori/106'>Najčešća pitanja i odgovori</a></li><li><a href='/mitovi-i-istine-o-koronavirusu/60'>Mitovi i istine o koronavirusu</a></li><li><a href='/kronologija-razvoja-epidemije/59'>Kronologija razvoja epidemije</a></li></ul>
-</li>
-<li><a href='/zupanije/139'>Županije</a> <span class='expand'></span><ul class='podNivo'>
-<li><a href='/bjelovarsko-bilogorska/154'>Bjelovarsko-bilogorska</a></li><li><a href='/brodsko-posavska/159'>Brodsko-posavska</a></li><li><a href='/dubrovacko-neretvanska/166'>Dubrovačko-neretvanska</a></li><li><a href='/grad-zagreb/140'>Grad Zagreb</a></li><li><a href='/istarska/165'>Istarska</a></li><li><a href='/karlovacka/146'>Karlovačka</a></li><li><a href='/koprivnicko-krizevacka/153'>Koprivničko-križevačka</a></li><li><a href='/krapinsko-zagorska-zupanija/174'>Krapinsko-zagorska županija</a></li><li><a href='/licko-senjska/156'>Ličko-senjska</a></li><li><a href='/medjimurska/167'>Međimurska</a></li><li><a href='/osjecko-baranjska/161'>Osječko-baranjska</a></li><li><a href='/pozesko-slavonska/158'>Požeško-slavonska</a></li><li><a href='/primorsko-goranska/155'>Primorsko-goranska</a></li><li><a href='/sisacko-moslavacka/144'>Sisačko-moslavačka</a></li><li><a href='/splitsko-dalmatinska/164'>Splitsko-dalmatinska</a></li><li><a href='/sibensko-kninska/162'>Šibensko-kninska</a></li><li><a href='/varazdinska/148'>Varaždinska</a></li><li><a href='/viroviticko-podravska/157'>Virovitičko-podravska</a></li><li><a href='/vukovarsko-srijemska/163'>Vukovarsko-srijemska</a></li><li><a href='/zadarska/160'>Zadarska</a></li><li><a href='/zagrebacka/143'>Zagrebačka </a></li></ul>
-</li>
-<li><a href='/vazni-brojevi/56'>Važni brojevi</a> </li>
-<li class='extra'><a href='/donacije/329'>DONACIJE</a> <span class='expand'></span><ul class='podNivo'>
-<li><a href='/donacije-financijskih-sredstava/330'>Donacije financijskih sredstava</a></li><li><a href='/donacije-medicinske-i-druge-potrebne-zdravstvene-opreme/316'>Donacije medicinske i druge potrebne zdravstvene opreme</a></li></ul>
-</li>
+<li><a href='/important-information/183'>Important information</a> </li>
+<li><a href='/important-phone-numbers/152'>Important phone numbers</a> </li>
+<li><a href='/latest-news/150'>Latest news</a> </li>
 </ul>
- <ul class="languages">
-<li><a href="/en">EN</a></li>
+<ul class="languages">
+<li><a href="/">HR</a></li>
 </ul>
 <div class="clear"></div>
 </nav>
@@ -923,23 +900,23 @@
 <div class="counter-wrapper">
 <ul>
 <li class='counter-updated'>
-<strong>Ažurirano</strong> 29.03. u 14:00
-<br><br><span class='izvor'>Izvor: Hrvatski zavod za javno zdravstvo</span>
+<strong>Updated</strong> March 29 at 14:00
+<br><br><span class='izvor'>Source: Croatian Institute of public health</span>
 </li>
 <li>
-<div class='counter-title'>Slučajevi</div>
-HR: <strong>713</strong><br>
-Svijet: <strong>687.905</strong>
+<div class='counter-title'>Cases</div>
+CRO: <strong>713</strong><br>
+World: <strong>687.905</strong>
 </li>
 <li>
-<div class='counter-title'>Izliječeni</div>
-HR: <strong>52</strong><br>
-Svijet: <strong>146.319</strong>
+<div class='counter-title'>Cured</div>
+CRO: <strong>52</strong><br>
+World: <strong>146.319</strong>
 </li>
 <li>
-<div class='counter-title'>Preminuli</div>
-HR: <strong>6</strong><br>
-Svijet: <strong>31.771</strong>
+<div class='counter-title'>Deceased</div>
+CRO: <strong>6</strong><br>
+World: <strong>31.771</strong>
 </li>
 </ul>
 </div>
@@ -3836,7 +3813,7 @@ Svijet: <strong>31.771</strong>
 </g>
 </svg>
 </div>
-<div class='main_article_right'><a href='/najnovije/ukupno-dosad-713-osoba-zarazenih-koronavirusom/35'><h2>Ukupno dosad 713 osoba zaraženih koronavirusom</h2></a><div class='gray'>Trenutno je potvrđeno ukupno 713 osoba zaraženih koronavirusom, a 52 osobe je ozdravilo. Dosad je šest osoba preminulo.&nbsp; </div><span class='date gray'>29.03.2020. 14:00</span><div class='canvasHolder1' style='min-height:225px;margin:30px 0;'>
+<div class='main_article_right'><a href='/latest-news/total-of-713-people-infected-in-croatia/151'><h2>Total of 713 people infected in Croatia</h2></a><div class='gray'>Total of 713 people infected with coronavirus was recoreded on Sunday in Croatia. Six deaths have been recorded. </div><span class='date gray'>29.03.2020. 14:00</span><div class='canvasHolder1' style='min-height:225px;margin:30px 0;'>
 <canvas id='canvas'></canvas>
 </div>
 <div class='canvasHolder2' style='min-height:225px;'>
@@ -3847,182 +3824,12 @@ Svijet: <strong>31.771</strong>
 <div class="clear"> </div>
 <div class="space_16"> </div>
 <div class='title-holder'>
-<a href='/najnovije/34'><h1>Najnovije</h1></a>
+<a href='/latest-news/150'><h1>Latest news</h1></a>
 </div>
 <div class='news_container'>
-<div class='news'><a href='/hrvatska-nabavila-12-5-tona-medicinske-opreme-iz-kine/345'><span class='news_img'><img src='/UserDocsImages//vijesti/AvionSangaj.jpg?width=366&amp;height=244&amp;mode=crop' alt='/vijesti/AvionSangaj.jpg' /></span><span class='news_txt'><span class='h2_small'>Hrvatska nabavila 12,5 tona medicinske opreme iz Kine</span></span></a><div class='gray'>Danas je u Zagreb iz Šangaja sletio zrakoplov tvrtke China Eastern Airlines kojim je stiglo 12,5 tona medicinske opreme potrebne za borbu protiv koronavirusa. Djelatnici Ravnateljstva civilne zaštite MUP-a Republike Hrvatske preuzeli su navedenu opremu te su zaduženi za daljnji transport i logistiku.&nbsp; </div><span class='date gray'>29.03.2020. 15:50</span><ul class='news_links'></ul></div><div class='news'><a href='/u-subotu-navecer-potvrdjen-pozitivan-nalaz-na-koronavirus-kod-sluzbenika-zatvora-u-splitu/344'><span class='news_img'><img src='/UserDocsImages//vijesti/Zatvor.jpg?width=366&amp;height=244&amp;mode=crop' alt='/vijesti/Zatvor.jpg' /></span><span class='news_txt'><span class='h2_small'>U subotu navečer potvrđen pozitivan nalaz na koronavirus kod službenika zatvora u Splitu</span></span></a><div class='gray'>Radi objektivnog izvješćivanja javnosti želimo naglasiti kako službenik nije imao bliskih kontakata sa zatvorenicima. </div><span class='date gray'>29.03.2020. 15:03</span><ul class='news_links'></ul></div><div class='news news3'><a href='/preporuke-o-provedbi-programa-obveznog-cijepljenja-tijekom-epidemije-koronavirusa/343'><span class='news_img'><img src='/UserDocsImages//vijesti/Cijepljenjedjece.jpg?width=366&amp;height=244&amp;mode=crop' alt='/vijesti/Cijepljenjedjece.jpg' /></span><span class='news_txt'><span class='h2_small'>Preporuke o provedbi Programa obveznog cijepljenja tijekom epidemije koronavirusa</span></span></a><div class='gray'>S obzirom na trenutnu epidemiološku situaciju vezano uz epidemiju koronavirusa, donosimo preporuke Hrvatskog zavoda za javno zdravstvo o provođenju programa obveznog cijepljenja. </div><span class='date gray'>28.03.2020. 18:56</span><ul class='news_links'></ul></div></div>
+<div class='news'><a href='/decision-on-quarantine-and-self-isolation-of-international-transport-drivers/325'><span class='news_img'><img src='/UserDocsImages//vijesti/Kamioni.jpg?width=366&amp;height=244&amp;mode=crop' alt='/vijesti/Kamioni.jpg' /></span><span class='news_txt'><span class='h2_small'>Decision on Quarantine and Self-Isolation of International Transport Drivers </span></span></a><div class='gray'> </div><span class='date gray'>March 29, 14:43</span><ul class='news_links'></ul></div><div class='news'><a href='/who-issues-passes-to-move-between-cities-in-croatia/306'><span class='news_img'><img src='/UserDocsImages//vijesti/HAK.jpg?width=366&amp;height=244&amp;mode=crop' alt='/vijesti/HAK.jpg' /></span><span class='news_txt'><span class='h2_small'>Who issues passes to move between cities in Croatia?</span></span></a><div class='gray'> </div><span class='date gray'>March 28, 22:08</span><ul class='news_links'></ul></div><div class='news news3'><a href='/travelling-find-all-important-information-in-one-place/210'><span class='news_img'><img src='/UserDocsImages//foto-content/putovanja.jpg?width=366&amp;height=244&amp;mode=crop' alt='/foto-content/putovanja.jpg' /></span><span class='news_txt'><span class='h2_small'>Travelling? Find all important information in one place</span></span></a><div class='gray'> </div><span class='date gray'>March 29, 13:10</span><ul class='news_links'></ul></div></div>
 <div class='clear'></div>
 <div class='space_32'></div>
-<div class='title-holder'>
-<a href='/sto-moram-znati/8'><h1>Što moram znati</h1></a>
-</div>
-<div class='news_container'>
-<div class='news '>
-<a href='/najcesca-pitanja-i-odgovori-315/315'>
-<span class='news_img'><img src='/UserDocsImages//slike/dezinfecijens.jpg?width=366&amp;height=244&amp;mode=crop' alt='Najčešća pitanja i odgovori'></span>
-<span class='news_txt'>
-<span class='h2'>Najčešća pitanja i odgovori</span>
-</span>
-</a>
-<span class='news_short gray'>Sve što treba znati o prevenciji i zaštiti od infekcije koronavirusom: najčešća pitanja i odgovori. </span>
-</div>
-<div class='news '>
-<a href='/vazne-upute-kako-sprijeciti-zarazu-koronavirusom/38'>
-<span class='news_img'><img src='/UserDocsImages//slike/pranje-ruku-4.jpg?width=366&amp;height=244&amp;mode=crop' alt='Važne upute: kako spriječiti zarazu koronavirusom?'></span>
-<span class='news_txt'>
-<span class='h2'>Važne upute: kako spriječiti zarazu koronavirusom?</span>
-</span>
-</a>
-<span class='news_short gray'>Postoje neke jednostavne stvari koje možete činiti da biste spriječili zarazu koronavirusom: svakako slijedite ove upute da biste smanjili rizik za sebe, ali i za druge. </span>
-</div>
-<div class='news news3'>
-<a href='/sto-znaci-samoizolacija-i-kako-je-provoditi/84'>
-<span class='news_img'><img src='/UserDocsImages//foto-content/toplomjer.jpg?width=366&amp;height=244&amp;mode=crop' alt='Što znači samoizolacija i kako je provoditi?'></span>
-<span class='news_txt'>
-<span class='h2'>Što znači samoizolacija i kako je provoditi?</span>
-</span>
-</a>
-<span class='news_short gray'>Trenutačno su mjere samoizolacije određene za 9000 ljudi u Hrvatskoj. Pažljivo proučite upute o samoizolaciji i pridržavajte ih se jer time štitite sebe i druge. </span>
-</div>
-</div>
-<div class='clear'></div>
-<div class='space_32'></div>
-<div Class='space_32'></div>
-<div class='title-holder'>
-<a href='/zadnje-azurirano/57'><h1>Zadnje ažurirano</h1></a>
-</div>
-<div class='latestNewsContainer'>
-<ul>
-<li>
-<a href='/hrvatska-nabavila-12-5-tona-medicinske-opreme-iz-kine/345'>
-Hrvatska nabavila 12,5 tona medicinske opreme iz Kine - <span class='date-time'>29.03.2020. 15:50</span>
-</a>
-</li>
-<li>
-<a href='/pozesko-slavonska/158'>
-Požeško-slavonska - <span class='date-time'>29.03.2020. 15:29</span>
-</a>
-</li>
-<li>
-<a href='/mjere-protiv-sirenja-koronavirusa-diljem-europe/73'>
-Mjere protiv širenja koronavirusa diljem Europe - <span class='date-time'>29.03.2020. 15:22</span>
-</a>
-</li>
-<li>
-<a href='/u-subotu-navecer-potvrdjen-pozitivan-nalaz-na-koronavirus-kod-sluzbenika-zatvora-u-splitu/344'>
-U subotu navečer potvrđen pozitivan nalaz na koronavirus kod službenika zatvora u Splitu - <span class='date-time'>29.03.2020. 15:03</span>
-</a>
-</li>
-<li>
-<a href='/idete-na-put-sve-informacije-na-jednom-mjestu/22'>
-Idete na put? Sve informacije na jednom mjestu! - <span class='date-time'>29.03.2020. 14:17</span>
-</a>
-</li>
-<li>
-<a href='/europska-komisija-koordinira-zajednicki-europski-odgovor-na-pandemiju-koronavirusa/339'>
-Europska komisija koordinira zajednički europski odgovor na pandemiju koronavirusa - <span class='date-time'>29.03.2020. 12:37</span>
-</a>
-</li>
-<li>
-<a href='/sto-znaci-samoizolacija-i-kako-je-provoditi/84'>
-Što znači samoizolacija i kako je provoditi? - <span class='date-time'>29.03.2020. 10:07</span>
-</a>
-</li>
-<li>
-<a href='/samoizolacija-tko-sve-treba-biti-u-njoj-i-pravila-koja-trebaju-postovati-ukucani-osobe-koja-je-u-izolaciji/304'>
-Samoizolacija - tko sve treba biti u njoj i pravila koja trebaju poštovati ukućani osobe koja je u izolaciji - <span class='date-time'>29.03.2020. 10:06</span>
-</a>
-</li>
-<li>
-<a href='/karlovacka/146'>
-Karlovačka - <span class='date-time'>28.03.2020. 19:58</span>
-</a>
-</li>
-<li>
-<a href='/osjecko-baranjska/161'>
-Osječko-baranjska - <span class='date-time'>28.03.2020. 19:55</span>
-</a>
-</li>
-<li>
-<a href='/sibensko-kninska/162'>
-Šibensko-kninska - <span class='date-time'>28.03.2020. 19:53</span>
-</a>
-</li>
-<li>
-<a href='/promjene-u-zracnom-prometu/95'>
-Promjene u zračnom prometu - <span class='date-time'>28.03.2020. 19:02</span>
-</a>
-</li>
-</ul>
-</div>
-<div Class='clear'> </div>
-<div Class='space_32'> </div>
-<div class='title-holder'>
-<a href='/vladine-mjere/101'><h1>Vladine mjere</h1></a>
-</div>
-<div class='news_container'>
-<div class='news'>
-<a href='/vladine-mjere/hamag-bicro-uvodi-nove-mjere-esif-zajmova-za-obrtna-sredstva/277'>
-<span class='news_img'><img src='/UserDocsImages//vijesti/pencils-762555_1920.jpg?width=366&amp;height=244&amp;mode=crop' alt='HAMAG-BICRO uvodi nove mjere ESIF zajmova za obrtna sredstva'></span>
-<span class='news_txt'>
-<span class='h2'>HAMAG-BICRO uvodi nove mjere ESIF zajmova za obrtna sredstva</span>
-</span>
-</a>
-<span class='news_short gray'> </span>
-</div>
-<div class='news'>
-<a href='/vladine-mjere/mjere-za-kulturu/133'>
-<span class='news_img'><img src='/UserDocsImages//vijesti/minkul.jpg?width=366&amp;height=244&amp;mode=crop' alt='Mjere za kulturu'></span>
-<span class='news_txt'>
-<span class='h2'>Mjere za kulturu</span>
-</span>
-</a>
-<span class='news_short gray'>Ministarstvo osniva krizni fond kako bi pomoglo kulturnim institucijama. Krizni fond obuhvatit će različite djelatnosti u kulturi. </span>
-</div>
-<div class='news news3'>
-<a href='/vladine-mjere/mjere-pomoci-gospodarstvu/126'>
-<span class='news_img'><img src='/UserDocsImages//vijesti/Vlada.jpg?width=366&amp;height=244&amp;mode=crop' alt='Mjere pomoći gospodarstvu'></span>
-<span class='news_txt'>
-<span class='h2'>Mjere pomoći gospodarstvu</span>
-</span>
-</a>
-<span class='news_short gray'>Vlada je na sjednici u utorak, 17. ožujka, donijela ukupno 66 mjera za pomoć gospodarstvu uslijed epidemije koronavirusa. Mjere se odnose na ukupno 8 ministarstva od kojih se velik dio mjera odnosi na očuvanje likvidnosti i radnih mjesta gospodarstvenika u okviru Ministarstva financija. </span>
-</div>
-</div>
-<div class='clear'> </div>
-<div class='space_16'> </div>
-<div class='title-holder'>
-<a href='/cinjenice-o-koronavirusu/55'><h1>Činjenice o koronavirusu</h1></a>
-</div>
-<div class='news_container'>
-<div class='news '>
-<a href='/cinjenice-o-koronavirusu/najcesca-pitanja-i-odgovori/106'>
-<span class='news_img'><img src='/UserDocsImages//slike/adult-biology-chemical-chemist-356040.jpg?width=366&amp;height=244&amp;mode=crop' alt='Najčešća pitanja i odgovori'></span>
-<span class='news_txt'>
-<span class='h2'>Najčešća pitanja i odgovori</span>
-</span>
-</a>
-<span class='news_short gray'>Kako se zaštititi od zaraze koronavirusom, kako se koronavirus prenosi, i sve ostale informacije koje su vam važne. </span>
-</div>
-<div class='news '>
-<a href='/cinjenice-o-koronavirusu/mitovi-i-istine-o-koronavirusu/60'>
-<span class='news_img'><img src='/UserDocsImages//slike/testiranje-lab.jpg?width=366&amp;height=244&amp;mode=crop' alt='Mitovi i istine o koronavirusu'></span>
-<span class='news_txt'>
-<span class='h2'>Mitovi i istine o koronavirusu</span>
-</span>
-</a>
-<span class='news_short gray'>Što je točno novi koronavirus, kako se prenosi, koje su mjere zaštite te što funkcionira, a što ne. Provjerene, medicinski točne informacije koje vam mogu pomoći. </span>
-</div>
-<div class='news news3'>
-<a href='/cinjenice-o-koronavirusu/kronologija-razvoja-epidemije/59'>
-<span class='news_img'><img src='/UserDocsImages//slike/Bolnica%20lije%C4%8Dnici.jpg?width=366&amp;height=244&amp;mode=crop' alt='Kronologija razvoja epidemije'></span>
-<span class='news_txt'>
-<span class='h2'>Kronologija razvoja epidemije</span>
-</span>
-</a>
-<span class='news_short gray'>Što sve znamo o epidemiji novog koronavirusa te bolesti pod nazivom COVID-19: kako je počela, odakle je krenula te kako se razvijala dosad. </span>
-</div>
-</div>
 </div>
 <div class="clear"> </div>
 <div class="space_24"> </div>
@@ -4032,7 +3839,7 @@ Promjene u zračnom prometu - <span class='date-time'>28.03.2020. 19:02</span>
 <footer class="footer">
 <div class="center">
 <div class="footer-logos-wrapper">
-<a class='fooLinkovi' href='https://www.hzjz.hr/' target='_blank'><img src='/UserDocsImages/footer/big/logo-hzjz-hrv.png?preset=cache' alt='HZJZ'></a><a class='fooLinkovi' href='https://civilna-zastita.gov.hr/' target='_blank'><img src='/UserDocsImages/footer/big/civilna-zastita-mup.png?preset=cache' alt='Civilna zaštita'></a><a class='fooLinkovi' href='https://zdravlje.gov.hr/' target='_blank'><img src='/UserDocsImages/footer/big/ministarstvo-zdravstva.png?preset=cache' alt='Ministarstvo zdravstva'></a>
+<a class='fooLinkovi' href='https://www.hzjz.hr/en/' target='_blank'><img src='/UserDocsImages/footer/logo-hzjz-eng.png?preset=cache' alt='HZJZ'></a><a class='fooLinkovi' href='https://civilna-zastita.gov.hr/' target='_blank'><img src='/UserDocsImages/footer/big/civilna-zastita-mup.png?preset=cache' alt='Civilna zaštita'></a><a class='fooLinkovi' href='https://zdravlje.gov.hr/' target='_blank'><img src='/UserDocsImages/footer/ministry-health.png?preset=cache' alt='Ministarstvo zdravstva'></a>
 </div>
 </div>
 <div class="clear"></div>
@@ -4040,18 +3847,18 @@ Promjene u zračnom prometu - <span class='date-time'>28.03.2020. 19:02</span>
 <div id="cookie-inner-wrapper">
 <div class="center">
 <div id="cookie-wrapper">
-<div id="cookie-info-wrapper">Ove internetske stranice koriste kolačiće (tzv. cookies) za pružanje boljeg korisničkog iskustva i funkcionalnosti. Postavke kolačića možete podesiti u svojem internetskom pregledniku. Više o kolačićima i načinu kako ih koristimo te načinu kako ih onemogućiti pročitajte&nbsp;<a href="https://gov.hr/cookies/1541" target="_blank">ovdje</a>. Klikom na gumb &#39;U redu&#39; pristajete na korištenje kolačića.</div>
-<p id="cookie-button">U redu</p>
+<div id="cookie-info-wrapper">We use cookies to help provide you with the best possible online experience. By using this site, you agree that we may store and access cookies on your device.&nbsp;If you want to use the sites without cookies or would like to know more, you can do that&nbsp;<a href="https://vlada.gov.hr/ostalo-14954/cookies-16121/16121" target="_blank">here</a>.</div>
+<p id="cookie-button">OK</p>
 </div>
 </div>
 </div>
 <footer class="footer_gov">
 <div class="center">
 <div class="footer_vrh">
-<a href="javascript:;" onClick="$('html, body').animate({ scrollTop: 0 }, 'slow');">Povratak na vrh</a>
+<a href="javascript:;" onClick="$('html, body').animate({ scrollTop: 0 }, 'slow');">Back to top</a>
 </div>
 <div class="footer_cp">
-Copyright &copy; 2020. Vlada Republike Hrvatske. <a href="https://vlada.gov.hr/uvjeti-koristenja/11852" target="_blank">Uvjeti korištenja</a>.
+Copyright &copy; 2020. Government of the Republic of Croatia. <a href="https://vlada.gov.hr/terms-of-use/15347" target="_blank">Terms of use</a>.
 </div>
 <div class="footer_col4">
 <nav>

@@ -9,7 +9,7 @@
 <title>Home</title>
 <meta name="keywords" content="" />
 <link href="/fonts/fonts_mapa.css?1=1" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes" />
 <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon_vlada.ico" />
 <meta property="og:title" content="Home" />
 <meta property="og:type" content="website" />
@@ -462,14 +462,17 @@
 									pointRadius: 2
 								}]
 							},
-							options: {
+                            options: {
+								zoom: {
+									enabled:false
+								},
 								title: {
 									font:{
 										family:'Lucida Grande, Lucida Sans Unicode, Arial, sans-serif'
 									},
 									display: true,
 									fontSize: '12',
-									text: 'Grafički pregled Hrvatska'
+									text: 'Visual display'
 								},					
 								tooltips: {
 									mode: 'nearest',
@@ -721,14 +724,17 @@
 									hoverBackgroundColor:"#424242"
 								}]
 							},
-							options: {
+                            options: {
+								zoom: {
+									enabled:false
+								},
 								title: {
 									font:{
 										family:'Lucida Grande, Lucida Sans Unicode, Arial, sans-serif'
 									},									
 									display: true,
 									fontSize: '12',
-									text: 'Novozaraženi u Hrvatskoj'
+									text: 'New cases in Croatia'
 								},					
 								tooltips: {
 									mode: 'index',
@@ -782,7 +788,7 @@
 												}
 												
 												var currIndex = tooltipItem.index;
-												var text = "Novozaraženi";
+												var text = "New cases";
 												var value = tooltipItem.value;
 												var returnValue = "";
 												
